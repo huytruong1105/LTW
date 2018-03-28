@@ -1,0 +1,147 @@
+mysql -h172.30.35.70 -uuser_c5 -p
+password: 
+
+use db_c5
+ 
+
+create table huy-truong_s(
+    sid varchar(3) PRIMARY KEY,
+    sname text NOT NULL,
+    status smallint,
+    city text
+);
+
+INSERT INTO huy-truong_s VALUES (‘S01’, ‘Smith’, 20, ‘London’);
+INSERT INTO huy-truong_s VALUES (‘S02’, ‘Jones’, 10, ‘Paris’);
+INSERT INTO huy-truong_s VALUES (‘S03’, ‘Blacke’, 30, ‘Paris’);
+
+ 
+
+create table huy-truong_p(
+    pid varchar(3) UNIQUE NOT NULL,
+    pname text NOT NULL,
+    color text,
+    weight smallint,
+    city text
+)
+
+INSERT INTO huy-truong_p VALUES (‘P01’, ‘Nut’, ‘red’, 12, ‘London’);
+INSERT INTO huy-truong_p VALUES (‘P02’, ‘Bolt’, ‘green’, 17, ‘Paris’);
+INSERT INTO huy-truong_p VALUES (‘P03’, ‘Screw’, ‘blue’, 17, ‘Roma’);
+INSERT INTO huy-truong_p VALUES (‘P04’, ‘Screw’, ‘red’, 14, ‘London’);
+ 
+
+create table huy-truong_sp(
+    sid varchar(3),
+    pid varchar(3),
+    qty integer NOT NULL CHECK (qty > 0),
+    CONSTRAINT sp_pkey PRIMARY KEY (sid,pid)
+);
+
+INSERT INTO huy-truong_sp VALUES (‘S01’, ‘P01’, 300);
+INSERT INTO huy-truong_sp VALUES (‘S01’, ‘P02’, 200);
+INSERT INTO huy-truong_sp VALUES (‘S01’, ‘P03’, 400);
+INSERT INTO huy-truong_sp VALUES (‘S02’, ‘P01’, 300);
+INSERT INTO huy-truong_sp VALUES (‘S02’, ‘P02’, 400);
+INSERT INTO huy-truong_sp VALUES (‘S03’, ‘P02’, 200);
+
+ 
+
+create table huy-truong_films(
+    code char(5) PRIMARY KEY,
+    title text NOT NULL,
+    date_prod date DEFAULT '2000/01/01'
+);
+
+ 
+
+alter table huy-truong_films ADD COLUMN nb int;
+
+alter table huy-truong_films DROP COLUMN nb;
+
+alter table huy-truong_films CHANGE title title varchar(30);
+
+ 
+
+INSERT INTO huy-truong_films VALUES (‘00001’, ‘Anh Hung Xa Dieu’, ‘1990/12/07’);
+INSERT INTO huy-truong_films VALUES (‘00002’, ‘Than Dieu Dai Hiep’, ‘1991/07/22’);
+INSERT INTO huy-truong_films VALUES (‘00013’, ‘Vo My Nuong’,’1999/10/15’);
+
+ 
+
+DELETE FROM huy-truong_films;
+DELETE FROM huy-truong_films WHERE code = ‘00013’;
+
+ 
+
+UPDATE huy-truong_films
+SET title = ‘Co Gai Do Long’
+WHERE code = ‘00001’;
+
+ 
+
+select * from huy-truong_s;
+
+select * from huy-truong_p;
+
+select * from huy-truong_sp;
+
+select * from huy-truong_sp limit 3;
+
+select * from huy-truong_sp limit 3 offset 2;
+
+select sid from huy-truong_s where city='Paris';
+
+select * from huy-truong_s where city like 'P%';
+
+select distinct pid from huy-truong_sp;
+
+select sid from huy-truong_s where city='Paris' and status > 20;
+
+select sid, status from huy-truong_s where city='Paris' order by status desc;
+
+select sname from huy-truong_s where sid in (select sid from huy-truong_sp where pid='P02');
+
+select pid from huy-truong_sd where sid='S01' union select pid from huy-truong_p where weight>13;
+
+select count(sid) from huy-truong_sp where pid='P02';
+
+select sum (qty) from huy-truong_sp where pid='P02';
+
+select pid, count(sid) from huy-truong_sp group by pid;
+
+select max(qty), avg(qty) from huy-truong_sp;
+
+select pid, sum(qty) from huy-truong_sp group by pid having pid<>'P02';
+
+ 
+
+create table huy-truong_t1(
+    id smallint,
+    name varchar(10)
+);
+
+INSERT INTO huy-truong_t1 values(1, "Peter");
+INSERT INTO huy-truong_t1 values(2, "Bob");
+INSERT INTO huy-truong_t1 values(3, "Joe");
+
+select * from huy-truong_t1;
+
+create table huy-truong_t2(
+    code smallint,
+    cname varchar(10)
+);
+
+INSERT INTO huy-truong_t1 values(5, "Laval");
+INSERT INTO huy-truong_t1 values(2, "Paris");
+INSERT INTO huy-truong_t1 values(3, "Nantes");
+
+select * from huy-truong_t2;
+
+select * from huy-truong_t1 cross join huy-truong_t2;
+
+select * from huy-truong_t1 inner join huy-truong_t2 on huy-truong_t1.id = huy-truong_t2.code;
+
+select * from huy-truong_t1 left join huy-truong_t2 on huy-truong_t1.id = huy-truong_t2.code;
+
+select * from huy-truong_t1 right join huy-truong_t2 on huy-truong_t1.id = huy-truong_t2.code;
