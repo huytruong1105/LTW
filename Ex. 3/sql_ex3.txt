@@ -1,0 +1,51 @@
+mysql -h172.30.35.70 -uuser_c5 -p
+password: 
+
+use db_c5;
+
+create table huy-truong_donvi(
+    madv char(3) NOT NULL PRIMARY KEY,
+    donvi varchar(30)
+);
+
+create table huy-truong_chucvu(
+    macv char(3) NOT NULL PRIMARY KEY,
+    chucvu varchar(30)
+);
+
+create table huy-truong_nhanvien(
+    manv char(6) NOT NULL PRIMARY KEY,
+    hoten varchar(30),
+    namsinh date,
+    giotinh varchar(3),
+    madv char(3),
+    macv char(3),
+    luong int CHECK (luong>1000), 
+    CONSTRAINT fk_nhanvien1 FOREIGN KEY (madv) REFERENCES huy-truong_donvi(madv),
+    CONSTRAINT fk_nhanvien2 FOREIGN KEY (macv) REFERENCES huy-truong_chucvu(macv)
+);
+
+INSERT INTO huy-truong_donvi values ("001", "Ban Giam Doc");
+INSERT INTO huy-truong_donvi values ("002", "Phong Ke Toan");
+INSERT INTO huy-truong_donvi values ("003", "Phong Nhan Su");
+INSERT INTO huy-truong_donvi values ("004", "Phong Hanh Chanh");
+INSERT INTO huy-truong_donvi values ("005", "Phong Ky Thuat"); 
+
+INSERT INTO huy-truong_chucvu values ("001", "Giam Doc"); 
+INSERT INTO huy-truong_chucvu values ("002", "Truong Phong Ke Toan");
+INSERT INTO huy-truong_chucvu values ("003", "Giam Doc Nhan Su");
+INSERT INTO huy-truong_chucvu values ("004", "Truong Phong Hanh Chanh");
+INSERT INTO huy-truong_chucvu values ("005", "Giam Doc Ky Thuat");
+INSERT INTO huy-truong_chucvu values ("006", "Nhan Vien");
+
+INSERT INTO huy-truong_nhanvien values ("000003", "Nguyen Thanh Binh", "1979-07-25", "Nam", "001", "001", 3200);
+INSERT INTO huy-truong_nhanvien values ("000004", "Tran Trung Tinh", "1982-05-10", "Nu", "004", "004", 1600);
+INSERT INTO huy-truong_nhanvien values ("000005", "Phan Xuan Trang", "1982-08-07", "Nu", "004", "006", 1200);
+INSERT INTO huy-truong_nhanvien values ("000006", "Bui Minh Quan", "1980-10-20", "Nam", "003", "003", 2200);
+INSERT INTO huy-truong_nhanvien values ("000007", "Lam Thuc Hoa", "1976-09-15", "Nu", "003", "006", 1200);
+INSERT INTO huy-truong_nhanvien values ("000008", "Lu Hy Phung", "1975-05-18", "Nu", "002", "002", 3200);
+INSERT INTO huy-truong_nhanvien values ("000009", "Nguyen Manh Hung", "1967-09-21", "Nam", "002", "006", 1200);
+INSERT INTO huy-truong_nhanvien values ("000010", "Nguyen An Phuoc", "1977-06-02", "Nam", "005", "006", 1200);
+INSERT INTO huy-truong_nhanvien values ("000011", "Tran Thanh Tung", "1978-07-28", "Nam", "005", "006", 1200);
+INSERT INTO huy-truong_nhanvien values ("000012", "Nguyen Xuan Huy", "1984-09-23", "Nam", "005", "006", 1200);
+INSERT INTO huy-truong_nhanvien values ("000013", "Le Kieu", "1993-09-23", "Nu", "001", "001", 9000);    
