@@ -73,6 +73,16 @@ mysql> create table huytruong_films(    code char(5) PRIMARY KEY,    title text
 NOT NULL,    date_prod date DEFAULT '2000/01/01');
 Query OK, 0 rows affected (0.07 sec)
 
+mysql> DESCRIBE huytruong_films;
++-----------+-------------+------+-----+------------+-------+
+| Field     | Type        | Null | Key | Default    | Extra |
++-----------+-------------+------+-----+------------+-------+
+| code      | char(5)     | NO   | PRI | NULL       |       |
+| title     | varchar(30) | YES  |     | NULL       |       |
+| date_prod | date        | YES  |     | 2000-01-01 |       |
++-----------+-------------+------+-----+------------+-------+
+3 rows in set (0.00 sec)
+
 mysql> alter table huytruong_films ADD COLUMN nb int;
 Query OK, 0 rows affected (0.16 sec)
 Records: 0  Duplicates: 0  Warnings: 0
@@ -85,6 +95,16 @@ mysql> alter table huytruong_films CHANGE title title varchar(30);
 Query OK, 0 rows affected (0.16 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
+mysql> DESCRIBE huytruong_films;
++-----------+-------------+------+-----+------------+-------+
+| Field     | Type        | Null | Key | Default    | Extra |
++-----------+-------------+------+-----+------------+-------+
+| code      | char(5)     | NO   | PRI | NULL       |       |
+| title     | varchar(30) | YES  |     | NULL       |       |
+| date_prod | date        | YES  |     | 2000-01-01 |       |
++-----------+-------------+------+-----+------------+-------+
+3 rows in set (0.00 sec)
+
 mysql> insert into huytruong_films values ('00001', 'Anh Hung Xa Dieu', '1990/12
 /07');insert into huytruong_films values ('00002', 'Than Dieu Dai Hiep', '1991/0
 7/22');insert into huytruong_films values ('00013', 'Vo My Nuong','1999/10/15');
@@ -95,17 +115,57 @@ Query OK, 1 row affected (0.03 sec)
 
 Query OK, 1 row affected (0.03 sec)
 
+mysql> select * from huytruong_films;
++-------+--------------------+------------+
+| code  | title              | date_prod  |
++-------+--------------------+------------+
+| 00001 | Anh Hung Xa Dieu   | 0000-00-00 |
+| 00002 | Than Dieu Dai Hiep | 0000-00-00 |
+| 00013 | Vo My Nuong        | 1999-10-15 |
++-------+--------------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from huytruong_films;
++-------+--------------------+------------+
+| code  | title              | date_prod  |
++-------+--------------------+------------+
+| 00001 | Anh Hung Xa Dieu   | 0000-00-00 |
+| 00002 | Than Dieu Dai Hiep | 0000-00-00 |
+| 00013 | Vo My Nuong        | 1999-10-15 |
++-------+--------------------+------------+
+3 rows in set (0.00 sec)
+
 mysql> DELETE FROM huytruong_films WHERE code = '00013';
 Query OK, 1 row affected (0.03 sec)
 
+mysql> select * from huytruong_films;
++-------+--------------------+------------+
+| code  | title              | date_prod  |
++-------+--------------------+------------+
+| 00001 | Anh Hung Xa Dieu   | 0000-00-00 |
+| 00002 | Than Dieu Dai Hiep | 0000-00-00 |
++-------+--------------------+------------+
+2 rows in set (0.00 sec)
+
 mysql> UPDATE huytruong_films SET title = 'Co Gai Do Long' WHERE code = '00001';
 
-Query OK, 1 row affected (0.03 sec)
+Query OK, 1 row affected (0.04 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
-mysql> DELETE FROM huytruong_films;
-Query OK, 2 rows affected (0.03 sec)
+mysql> select * from huytruong_films;
++-------+--------------------+------------+
+| code  | title              | date_prod  |
++-------+--------------------+------------+
+| 00001 | Co Gai Do Long     | 0000-00-00 |
+| 00002 | Than Dieu Dai Hiep | 0000-00-00 |
++-------+--------------------+------------+
+2 rows in set (0.00 sec)
 
+mysql> DELETE FROM huytruong_films;
+Query OK, 2 rows affected (0.04 sec)
+
+mysql> select * from huytruong_films;
+Empty set (0.00 sec)
 
 mysql> select * from huytruong_s;
 +-----+--------+--------+--------+
@@ -363,4 +423,18 @@ uytruong_t2.code;
 +------+------+------+--------+
 3 rows in set (0.00 sec)
 
-mysql>
+mysql> select 3*3-4, sqrt(16), round(2.6), abs(-2);
++-------+----------+------------+---------+
+| 3*3-4 | sqrt(16) | round(2.6) | abs(-2) |
++-------+----------+------------+---------+
+|     5 |        4 |          3 |       2 |
++-------+----------+------------+---------+
+1 row in set (0.00 sec)
+
+mysql> select current_date(), rand(), ln(2.7);
++----------------+--------------------+--------------------+
+| current_date() | rand()             | ln(2.7)            |
++----------------+--------------------+--------------------+
+| 2018-03-29     | 0.5584068955466216 | 0.9932517730102834 |
++----------------+--------------------+--------------------+
+1 row in set (0.00 sec)

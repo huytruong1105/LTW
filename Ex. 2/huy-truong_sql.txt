@@ -12,9 +12,9 @@ create table huytruong_s(
     city text
 );
 
-insert into huytruong_s values ('S01', 'Smith', 20, 'London');
-insert into huytruong_s values ('S02', 'Jones', 10, 'Paris');
-insert into huytruong_s values ('S03', 'Blacke', 30, 'Paris');
+insert into huytruong_s values ("S01", "Smith", 20, "London");
+insert into huytruong_s values ("S02", "Jones", 10, "Paris");
+insert into huytruong_s values ("S03", "Blacke", 30, "Paris");
 
  
 
@@ -26,10 +26,10 @@ create table huytruong_p(
     city text
 );
 
-insert into huytruong_p values ('P01', 'Nut', 'red', 12, 'London');
-insert into huytruong_p values ('P02', 'Bolt', 'green', 17, 'Paris');
-insert into huytruong_p values ('P03', 'Screw', 'blue', 17, 'Roma');
-insert into huytruong_p values ('P04', 'Screw', 'red', 14, 'London');
+insert into huytruong_p values ("P01", "Nut", "red", 12, "London");
+insert into huytruong_p values ("P02", "Bolt", "green", 17, "Paris");
+insert into huytruong_p values ("P03", "Screw", "blue", 17, "Roma");
+insert into huytruong_p values ("P04", "Screw", "red", 14, "London");
  
 
 create table huytruong_sp(
@@ -39,22 +39,22 @@ create table huytruong_sp(
     CONSTRAINT sp_pkey PRIMARY KEY (sid,pid)
 );
 
-insert into huytruong_sp values ('S01', 'P01', 300);
-insert into huytruong_sp values ('S01', 'P02', 200);
-insert into huytruong_sp values ('S01', 'P03', 400);
-insert into huytruong_sp values ('S02', 'P01', 300);
-insert into huytruong_sp values ('S02', 'P02', 400);
-insert into huytruong_sp values ('S03', 'P02', 200);
+insert into huytruong_sp values ("S01", "P01", 300);
+insert into huytruong_sp values ("S01", "P02", 200);
+insert into huytruong_sp values ("S01", "P03", 400);
+insert into huytruong_sp values ("S02", "P01", 300);
+insert into huytruong_sp values ("S02", "P02", 400);
+insert into huytruong_sp values ("S03", "P02", 200);
 
  
 
 create table huytruong_films(
     code char(5) PRIMARY KEY,
     title text NOT NULL,
-    date_prod date DEFAULT '2000/01/01'
+    date_prod date DEFAULT "2000/01/01"
 );
 
- 
+DESCRIBE huytruong_films;
 
 alter table huytruong_films ADD COLUMN nb int;
 
@@ -62,22 +62,24 @@ alter table huytruong_films DROP COLUMN nb;
 
 alter table huytruong_films CHANGE title title varchar(30);
 
- 
+DESCRIBE huytruong_films;
 
-insert into huytruong_films values ('00001', 'Anh Hung Xa Dieu', '1990/12/07');
-insert into huytruong_films values ('00002', 'Than Dieu Dai Hiep', '1991/07/22');
-insert into huytruong_films values ('00013', 'Vo My Nuong','1999/10/15');
+insert into huytruong_films values ("00001", "Anh Hung Xa Dieu", "1990/12/07");
+insert into huytruong_films values ("00002", "Than Dieu Dai Hiep", "1991/07/22");
+insert into huytruong_films values ("00013", "Vo My Nuong","1999/10/15");
 
- 
+select * from huytruong_films; 
 
 DELETE FROM huytruong_films;
-DELETE FROM huytruong_films WHERE code = '00013';
+DELETE FROM huytruong_films WHERE code = "00013";
 
  
 
-UPDATE huytruong_films SET title = 'Co Gai Do Long' WHERE code = '00001';
+UPDATE huytruong_films SET title = "Co Gai Do Long" WHERE code = "00001";
 
- 
+select 3*3-4, sqrt(16), round(2.6), abs(-2);
+
+select current_date(), rand(), ln(2.7); 
 
 select * from huytruong_s;
 
@@ -89,29 +91,29 @@ select * from huytruong_sp limit 3;
 
 select * from huytruong_sp limit 3 offset 2;
 
-select sid from huytruong_s where city='Paris';
+select sid from huytruong_s where city="Paris";
 
-select * from huytruong_s where city like 'P%';
+select * from huytruong_s where city like "P%";
 
 select distinct pid from huytruong_sp;
 
-select sid from huytruong_s where city='Paris' and status > 20;
+select sid from huytruong_s where city="Paris" and status > 20;
 
-select sid, status from huytruong_s where city='Paris' order by status desc;
+select sid, status from huytruong_s where city="Paris" order by status desc;
 
-select sname from huytruong_s where sid in (select sid from huytruong_sp where pid='P02');
+select sname from huytruong_s where sid in (select sid from huytruong_sp where pid="P02");
 
-select pid from huytruong_sp where sid='S01' union select pid from huytruong_p where weight>13;
+select pid from huytruong_sp where sid="S01" union select pid from huytruong_p where weight>13;
 
-select count(sid) from huytruong_sp where pid='P02';
+select count(sid) from huytruong_sp where pid="P02";
 
-select sum(qty) from huytruong_sp where pid='P02';
+select sum(qty) from huytruong_sp where pid="P02";
 
 select pid, count(sid) from huytruong_sp group by pid;
 
 select max(qty), avg(qty) from huytruong_sp;
 
-select pid, sum(qty) from huytruong_sp group by pid having pid<>'P02';
+select pid, sum(qty) from huytruong_sp group by pid having pid<>"P02";
 
  
 
