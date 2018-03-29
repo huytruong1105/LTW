@@ -1,0 +1,366 @@
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\student>cd  \xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -h172.30.35.70 -uuser_c5 -p
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1397
+Server version: 5.5.41-0ubuntu0.14.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use db_c5;
+Database changed
+
+mysql> create table huytruong_s(    sid varchar(3) PRIMARY KEY,    sname text NO
+T NULL,    status smallint,    city text);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> insert into huytruong_s values ('S01', 'Smith', 20, 'London');insert into
+ huytruong_s values ('S02', 'Jones', 10, 'Paris');insert into huytruong_s values
+ ('S03', 'Blacke', 30, 'Paris');
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+mysql> create table huytruong_p(    pid varchar(3) UNIQUE NOT NULL,    pname tex
+t NOT NULL,    color text,    weight smallint,    city text);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> insert into huytruong_p values ('P01', 'Nut', 'red', 12, 'London');insert
+ into huytruong_p values ('P02', 'Bolt', 'green', 17, 'Paris');insert into huytr
+uong_p values ('P03', 'Screw', 'blue', 17, 'Roma');insert into huytruong_p value
+s ('P04', 'Screw', 'red', 14, 'London');
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+mysql> create table huytruong_sp(    sid varchar(3),    pid varchar(3),    qty i
+nteger NOT NULL CHECK (qty > 0),    CONSTRAINT sp_pkey PRIMARY KEY (sid,pid));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> insert into huytruong_sp values ('S01', 'P01', 300);insert into huytruong
+_sp values ('S01', 'P02', 200);insert into huytruong_sp values ('S01', 'P03', 40
+0);insert into huytruong_sp values ('S02', 'P01', 300);insert into huytruong_sp
+values ('S02', 'P02', 400);insert into huytruong_sp values ('S03', 'P02', 200);
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+mysql> create table huytruong_films(    code char(5) PRIMARY KEY,    title text
+NOT NULL,    date_prod date DEFAULT '2000/01/01');
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> alter table huytruong_films ADD COLUMN nb int;
+Query OK, 0 rows affected (0.16 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table huytruong_films DROP COLUMN nb;
+Query OK, 0 rows affected (0.17 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table huytruong_films CHANGE title title varchar(30);
+Query OK, 0 rows affected (0.16 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into huytruong_films values ('00001', 'Anh Hung Xa Dieu', '1990/12
+/07');insert into huytruong_films values ('00002', 'Than Dieu Dai Hiep', '1991/0
+7/22');insert into huytruong_films values ('00013', 'Vo My Nuong','1999/10/15');
+
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+mysql> DELETE FROM huytruong_films WHERE code = '00013';
+Query OK, 1 row affected (0.03 sec)
+
+mysql> UPDATE huytruong_films SET title = 'Co Gai Do Long' WHERE code = '00001';
+
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> DELETE FROM huytruong_films;
+Query OK, 2 rows affected (0.03 sec)
+
+
+mysql> select * from huytruong_s;
++-----+--------+--------+--------+
+| sid | sname  | status | city   |
++-----+--------+--------+--------+
+| S01 | Smith  |     20 | London |
+| S02 | Jones  |     10 | Paris  |
+| S03 | Blacke |     30 | Paris  |
++-----+--------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from huytruong_p;
++-----+-------+-------+--------+--------+
+| pid | pname | color | weight | city   |
++-----+-------+-------+--------+--------+
+| P01 | Nut   | red   |     12 | London |
+| P02 | Bolt  | green |     17 | Paris  |
+| P03 | Screw | blue  |     17 | Roma   |
+| P04 | Screw | red   |     14 | London |
++-----+-------+-------+--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from huytruong_sp;
++-----+-----+-----+
+| sid | pid | qty |
++-----+-----+-----+
+| S01 | P01 | 300 |
+| S01 | P02 | 200 |
+| S01 | P03 | 400 |
+| S02 | P01 | 300 |
+| S02 | P02 | 400 |
+| S03 | P02 | 200 |
++-----+-----+-----+
+6 rows in set (0.00 sec)
+
+mysql> select * from huytruong_sp limit 3;
++-----+-----+-----+
+| sid | pid | qty |
++-----+-----+-----+
+| S01 | P01 | 300 |
+| S01 | P02 | 200 |
+| S01 | P03 | 400 |
++-----+-----+-----+
+3 rows in set (0.00 sec)
+
+mysql> select * from huytruong_sp limit 3 offset 2;
++-----+-----+-----+
+| sid | pid | qty |
++-----+-----+-----+
+| S01 | P03 | 400 |
+| S02 | P01 | 300 |
+| S02 | P02 | 400 |
++-----+-----+-----+
+3 rows in set (0.00 sec)
+
+mysql> select sid from huytruong_s where city='Paris';
++-----+
+| sid |
++-----+
+| S02 |
+| S03 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> select * from huytruong_s where city like 'P%';
++-----+--------+--------+-------+
+| sid | sname  | status | city  |
++-----+--------+--------+-------+
+| S02 | Jones  |     10 | Paris |
+| S03 | Blacke |     30 | Paris |
++-----+--------+--------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select distinct pid from huytruong_sp;
++-----+
+| pid |
++-----+
+| P01 |
+| P02 |
+| P03 |
++-----+
+3 rows in set (0.00 sec)
+
+mysql> select sid from huytruong_s where city='Paris' and status > 20;
++-----+
+| sid |
++-----+
+| S03 |
++-----+
+1 row in set (0.00 sec)
+
+mysql> select sid, status from huytruong_s where city='Paris' order by status de
+sc;
++-----+--------+
+| sid | status |
++-----+--------+
+| S03 |     30 |
+| S02 |     10 |
++-----+--------+
+2 rows in set (0.00 sec)
+
+mysql> select sname from huytruong_s where sid in (select sid from huytruong_sp
+where pid='P02');
++--------+
+| sname  |
++--------+
+| Smith  |
+| Jones  |
+| Blacke |
++--------+
+3 rows in set (0.00 sec)
+
+mysql> select pid from huytruong_sp where sid='S01' union select pid from huytru
+ong_p where weight>13;
++-----+
+| pid |
++-----+
+| P01 |
+| P02 |
+| P03 |
+| P04 |
++-----+
+4 rows in set (0.00 sec)
+
+mysql> select count(sid) from huytruong_sp where pid='P02';
++------------+
+| count(sid) |
++------------+
+|          3 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(qty) from huytruong_sp where pid='P02';
++----------+
+| sum(qty) |
++----------+
+|      800 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select pid, count(sid) from huytruong_sp group by pid;
++-----+------------+
+| pid | count(sid) |
++-----+------------+
+| P01 |          2 |
+| P02 |          3 |
+| P03 |          1 |
++-----+------------+
+3 rows in set (0.00 sec)
+
+mysql> select max(qty), avg(qty) from huytruong_sp;
++----------+----------+
+| max(qty) | avg(qty) |
++----------+----------+
+|      400 | 300.0000 |
++----------+----------+
+1 row in set (0.00 sec)
+
+mysql> select pid, sum(qty) from huytruong_sp group by pid having pid<>'P02';
++-----+----------+
+| pid | sum(qty) |
++-----+----------+
+| P01 |      600 |
+| P03 |      400 |
++-----+----------+
+2 rows in set (0.00 sec)
+
+mysql> create table huytruong_t1(    id smallint,    name varchar(10));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into huytruong_t1 values(1, "Peter");insert into huytruong_t1 valu
+es(2, "Bob");insert into huytruong_t1 values(3, "Joe");
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from huytruong_t1;
++------+-------+
+| id   | name  |
++------+-------+
+|    1 | Peter |
+|    2 | Bob   |
+|    3 | Joe   |
++------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table huytruong_t2(    code smallint,    cname varchar(10));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> insert into huytruong_t2 values(5, "Laval");insert into huytruong_t2 valu
+es(2, "Paris");insert into huytruong_t2 values(3, "Nantes");
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from huytruong_t2;
++------+--------+
+| code | cname  |
++------+--------+
+|    5 | Laval  |
+|    2 | Paris  |
+|    3 | Nantes |
++------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from huytruong_t1 cross join huytruong_t2;
++------+-------+------+--------+
+| id   | name  | code | cname  |
++------+-------+------+--------+
+|    1 | Peter |    5 | Laval  |
+|    2 | Bob   |    5 | Laval  |
+|    3 | Joe   |    5 | Laval  |
+|    1 | Peter |    2 | Paris  |
+|    2 | Bob   |    2 | Paris  |
+|    3 | Joe   |    2 | Paris  |
+|    1 | Peter |    3 | Nantes |
+|    2 | Bob   |    3 | Nantes |
+|    3 | Joe   |    3 | Nantes |
++------+-------+------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from huytruong_t1 inner join huytruong_t2 on huytruong_t1.id = h
+uytruong_t2.code;
++------+------+------+--------+
+| id   | name | code | cname  |
++------+------+------+--------+
+|    2 | Bob  |    2 | Paris  |
+|    3 | Joe  |    3 | Nantes |
++------+------+------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from huytruong_t1 left join huytruong_t2 on huytruong_t1.id = hu
+ytruong_t2.code;
++------+-------+------+--------+
+| id   | name  | code | cname  |
++------+-------+------+--------+
+|    1 | Peter | NULL | NULL   |
+|    2 | Bob   |    2 | Paris  |
+|    3 | Joe   |    3 | Nantes |
++------+-------+------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from huytruong_t1 right join huytruong_t2 on huytruong_t1.id = h
+uytruong_t2.code;
++------+------+------+--------+
+| id   | name | code | cname  |
++------+------+------+--------+
+| NULL | NULL |    5 | Laval  |
+|    2 | Bob  |    2 | Paris  |
+|    3 | Joe  |    3 | Nantes |
++------+------+------+--------+
+3 rows in set (0.00 sec)
+
+mysql>
