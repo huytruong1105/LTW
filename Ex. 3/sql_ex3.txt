@@ -1,5 +1,6 @@
+cd  \xampp\mysql\bin
 mysql -h172.30.35.70 -uuser_c5 -p
-password: 
+password: puser_c5 
 
 use db_c5;
 
