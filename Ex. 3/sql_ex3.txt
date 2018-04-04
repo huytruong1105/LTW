@@ -21,8 +21,8 @@ create table huytruong_nhanvien(
     madv char(3),
     macv char(3),
     luong int CHECK (luong>1000), 
-    CONSTRAINT fk_nhanvien1 FOREIGN KEY (madv) REFERENCES huy-truong_donvi(madv),
-    CONSTRAINT fk_nhanvien2 FOREIGN KEY (macv) REFERENCES huy-truong_chucvu(macv)
+    CONSTRAINT fk_nhanvien1 FOREIGN KEY (madv) REFERENCES huytruong_donvi(madv),
+    CONSTRAINT fk_nhanvien2 FOREIGN KEY (macv) REFERENCES huytruong_chucvu(macv)
 );
 
 INSERT INTO huytruong_donvi values ("001", "Ban Giam Doc");
