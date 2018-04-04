@@ -18,7 +18,7 @@ create table huytruong_nhanvien(
     manv char(6) NOT NULL PRIMARY KEY,
     hoten varchar(30),
     namsinh date,
-    giotinh varchar(3),
+    gioitinh varchar(3),
     madv char(3),
     macv char(3),
     luong int CHECK (luong>1000), 
